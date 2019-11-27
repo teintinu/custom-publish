@@ -8,12 +8,13 @@ const opts = require(configFile)
 const currentVersion = getCurrent()
 const newVersion = pkg.version
 
+console.log(JSON.stringify(process.env))
+
 if (opts.canPublish(currentVersion, newVersion)) {
   if (opts.tag) {
-    exec('git config --global user.name custom-publish')
-    exec('git config --global user.email custom-publish@noreply.npmjs.com')
     exec(`git tag ${newVersion}`)
-    exec('git push --tags')
+    const repo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@github.com/${process.env.REPOSITORY}.git`
+    exec(`it push ${repo} --tags`)
   }
   exec('npm publish --access=public')
   opts.afterPublish && opts.afterPublish(newVersion)

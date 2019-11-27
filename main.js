@@ -29,7 +29,7 @@ if (opts.canPublish(currentVersion, newVersion)) {
   if (opts.tag) {
     exec(`git tag ${newVersion}`)
     const repo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`
-    exec(`it push ${repo} --tags`)
+    exec(`git push ${repo} --tags`)
   }
   exec('npm publish --access=public')
   opts.afterPublish && opts.afterPublish(newVersion)

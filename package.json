@@ -1,8 +1,8 @@
 {
   "name": "custom-publish",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Custumized npm publishing",
-  "main": "./main.js",
+  "bin": "./main.js",
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -23,5 +23,6 @@ jobs:
 
     - name: deploy
       env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}        
         NPM_CONFIG_TOKEN: ${{ secrets.NPM_CONFIG_TOKEN }}
       run: node ./main.js

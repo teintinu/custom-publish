@@ -2,7 +2,7 @@ module.exports = {
   tag: true,
   canPublish (currentVersion, newVersion) {
     if (!process.env.NPM_CONFIG_TOKEN) {
-      console.log('Merge-release requires NPM_CONFIG_TOKEN')
+      console.log('requires NPM_CONFIG_TOKEN')
       process.exit(1)
     }
     const same = currentVersion === newVersion

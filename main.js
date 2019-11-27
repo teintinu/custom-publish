@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const path = require('path')
 const { execSync } = require('child_process')
 const pkg = require(path.join(process.cwd(), 'package.json'))

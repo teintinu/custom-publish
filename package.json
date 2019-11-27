@@ -1,6 +1,6 @@
 {
   "name": "custom-publish",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Custumized npm publishing",
   "main": "./main.js",
   "keywords": [],

@@ -8,30 +8,28 @@ const opts = require(configFile)
 const currentVersion = getCurrent()
 const newVersion = pkg.version
 
-console.log(JSON.stringify(process.env, null, 2))
-
 if (opts.tag) {
   if (!process.env.GITHUB_REPOSITORY) {
-    console.log('requires GITHUB_REPOSITORY')
+    console.log('custom-publish with tag option requires GITHUB_REPOSITORY')
     process.exit(1)
   }
   if (!process.env.GITHUB_ACTOR) {
-    console.log('requires GITHUB_ACTOR')
+    console.log('custom-publish with tag option requires GITHUB_ACTOR')
     process.exit(1)
   }
   if (!process.env.GITHUB_TOKEN) {
-    console.log('requires GITHUB_TOKEN')
+    console.log('custom-publish with tag option requires GITHUB_TOKEN')
     process.exit(1)
   }
 }
 
 if (opts.canPublish(currentVersion, newVersion)) {
+  exec('npm publish --access=public')
   if (opts.tag) {
     exec(`git tag ${newVersion}`)
     const repo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`
-    exec(`git push ${repo} --tags`)
+    exec(`git push "${repo}" --tags`)
   }
-  exec('npm publish --access=public')
   opts.afterPublish && opts.afterPublish(newVersion)
 }
 

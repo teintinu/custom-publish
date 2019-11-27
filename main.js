@@ -11,6 +11,8 @@ const newVersion = pkg.version
 if (opts.canPublish(currentVersion, newVersion)) {
   exec('npm publish --access=public')
   if (opts.tag) {
+    exec('git config user.name custom-publish')
+    exec('git config user.email custom-publish@noreply.npmjs.com')
     exec(`git tag ${newVersion}`)
     exec('git push --tags')
   }
